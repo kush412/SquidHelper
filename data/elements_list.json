@@ -1,0 +1,192 @@
+[
+  {
+      "name": "src",
+      "description": "source (client) IP addresses",
+      "metadata": ""
+  },
+  {
+      "name": "dst",
+      "description": "destination (server) IP addresses",
+      "metadata": ""
+  },
+  {
+      "name": "myip",
+      "description": "the local IP address of a client’s connection",
+      "metadata": ""
+  },
+  {
+      "name": "arp",
+      "description": "Ethernet (MAC) address matching",
+      "metadata": ""
+  },
+  {
+      "name": "srcdomain",
+      "description": "source (client) domain name",
+      "metadata": ""
+  },
+  {
+      "name": "dstdomain",
+      "description": "destination (server) domain name",
+      "metadata": ""
+  },
+  {
+      "name": "srcdom_regex",
+      "description": "source (client) regular expression pattern matching",
+      "metadata": ""
+  },
+  {
+      "name": "dstdom_regex",
+      "description": "destination (server) regular expression pattern matching",
+      "metadata": ""
+  },
+  {
+      "name": "src_as",
+      "description": "source (client) Autonomous System number",
+      "metadata": ""
+  },
+  {
+      "name": "dst_as",
+      "description": "destination (server) Autonomous System number",
+      "metadata": ""
+  },
+  {
+      "name": "peername",
+      "description": "name tag assigned to the cache_peer where request is expected to be sent.",
+      "metadata": ""
+  },
+  {
+      "name": "time",
+      "description": "time of day, and day of week",
+      "metadata": ""
+  },
+  {
+      "name": "url_regex",
+      "description": "URL regular expression pattern matching",
+      "metadata": ""
+  },
+  {
+      "name": "urlpath_regex",
+      "description": "URL-path regular expression pattern matching, leaves out the protocol and hostname",
+      "metadata": ""
+  },
+  {
+      "name": "port",
+      "description": "destination (server) port number",
+      "metadata": ""
+  },
+  {
+      "name": "myport",
+      "description": "local port number that client connected to",
+      "metadata": ""
+  },
+  {
+      "name": "myportname",
+      "description": "name tag assigned to the squid listening port that client connected to",
+      "metadata": ""
+  },
+  {
+      "name": "proto",
+      "description": "transfer protocol (http, ftp, etc)",
+      "metadata": ""
+  },
+  {
+      "name": "method",
+      "description": "HTTP request method (get, post, etc)",
+      "metadata": ""
+  },
+  {
+      "name": "http_status",
+      "description": "HTTP response status (200 302 404 etc.)",
+      "metadata": ""
+  },
+  {
+      "name": "browser",
+      "description": "regular expression pattern matching on the request user-agent header",
+      "metadata": ""
+  },
+  {
+      "name": "referer_regex",
+      "description": "regular expression pattern matching on the request http-referer header",
+      "metadata": ""
+  },
+  {
+      "name": "ident",
+      "description": "string matching on the user’s name",
+      "metadata": ""
+  },
+  {
+      "name": "ident_regex",
+      "description": "regular expression pattern matching on the user’s name",
+      "metadata": ""
+  },
+  {
+      "name": "proxy_auth",
+      "description": "user authentication via external processes",
+      "metadata": ""
+  },
+  {
+      "name": "proxy_auth_regex",
+      "description": "regular expression pattern matching on user authentication via external processes",
+      "metadata": ""
+  },
+  {
+      "name": "snmp_community",
+      "description": "SNMP community string matching",
+      "metadata": ""
+  },
+  {
+      "name": "maxconn",
+      "description": "a limit on the maximum number of connections from a single client IP address",
+      "metadata": ""
+  },
+  {
+      "name": "max_user_ip",
+      "description": "a limit on the maximum number of IP addresses one user can login from",
+      "metadata": ""
+  },
+  {
+      "name": "req_mime_type",
+      "description": "regular expression pattern matching on the request content-type header",
+      "metadata": ""
+  },
+  {
+      "name": "req_header",
+      "description": "regular expression pattern matching on a request header content",
+      "metadata": ""
+  },
+  {
+      "name": "rep_mime_type",
+      "description": "regular expression pattern matching on the reply (downloaded content) content-type header. This is only usable in the http_reply_access directive, not http_access.",
+      "metadata": ""
+  },
+  {
+      "name": "rep_header",
+      "description": "regular expression pattern matching on a reply header content. This is only usable in the http_reply_access directive, not http_access.",
+      "metadata": ""
+  },
+  {
+      "name": "external",
+      "description": "lookup via external acl helper defined by external_acl_type",
+      "metadata": ""
+  },
+  {
+      "name": "user_cert",
+      "description": "match against attributes in a user SSL certificate",
+      "metadata": ""
+  },
+  {
+      "name": "ca_cert",
+      "description": "match against attributes a user's issuing CA SSL certificate",
+      "metadata": ""
+  },
+  {
+      "name": "ext_user",
+      "description": "match on user= field returned by external acl helper defined by external_acl_type",
+      "metadata": ""
+  },
+  {
+      "name": "ext_user_regex",
+      "description": "regular expression pattern matching on user= field returned by external acl helper defined by external_acl_type",
+      "metadata": ""
+  }
+]

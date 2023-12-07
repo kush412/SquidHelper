@@ -1,0 +1,8 @@
+**/__pycache__
+**/.idea
+**/.todo
+*.bak
+test_server.json
+server/
+!server/sample
+test*

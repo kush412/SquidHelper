@@ -1,0 +1,102 @@
+[
+    {
+        "name": "http_access",
+        "description": "Allows HTTP clients (browsers) to access the HTTP port. This is the primary access control list.",
+        "metadata": ""
+    },
+    {
+        "name": "http_reply_access",
+        "description": "Allows HTTP clients (browsers) to receive the reply to their request. This further restricts permissions given by http_access, and is primarily intended to be used together with rep_mime_type acl for blocking different content types.",
+        "metadata": ""
+    },
+    {
+        "name": "icp_access",
+        "description": "Allows neighbor caches to query your cache with ICP.",
+        "metadata": ""
+    },
+    {
+        "name": "miss_access",
+        "description": "Allows certain clients to forward cache misses through your cache. This further restricts permissions given by http_access, and is primarily intended to be used for enforcing sibling relations by denying siblings from forwarding cache misses through your cache.",
+        "metadata": ""
+    },
+    {
+        "name": "cache",
+        "description": "Defines responses that should not be cached.",
+        "metadata": ""
+    },
+    {
+        "name": "url_rewrite_access",
+        "description": "Controls which requests are sent through the redirector pool.",
+        "metadata": ""
+    },
+    {
+        "name": "ident_lookup_access",
+        "description": "Controls which requests need an Ident lookup.",
+        "metadata": ""
+    },
+    {
+        "name": "always_direct",
+        "description": "Controls which requests should always be forwarded directly to origin servers.",
+        "metadata": ""
+    },
+    {
+        "name": "never_direct",
+        "description": "Controls which requests should never be forwarded directly to origin servers.",
+        "metadata": ""
+    },
+    {
+        "name": "snmp_access",
+        "description": "Controls SNMP client access to the cache.",
+        "metadata": ""
+    },
+    {
+        "name": "broken_posts",
+        "description": "Defines requests for which squid appends an extra CRLF after POST message bodies as required by some broken origin servers.",
+        "metadata": ""
+    },
+    {
+        "name": "cache_peer_access",
+        "description": "Controls which requests can be forwarded to a given neighbor (cache_peer).",
+        "metadata": ""
+    },
+    {
+        "name": "htcp_access",
+        "description": "Controls which remote machines are able to make HTCP requests.",
+        "metadata": ""
+    },
+    {
+        "name": "htcp_clr_access",
+        "description": "Controls which remote machines are able to make HTCP CLR requests.",
+        "metadata": ""
+    },
+    {
+        "name": "request_header_access",
+        "description": "Controls which request headers are removed when violating HTTP protocol.",
+        "metadata": ""
+    },
+    {
+        "name": "reply_header_access",
+        "description": "Controls which reply headers are removed from delivery to the client when violating HTTP protocol.",
+        "metadata": ""
+    },
+    {
+        "name": "delay_access",
+        "description": "Controls which requests are handled by what delay pool.",
+        "metadata": ""
+    },
+    {
+        "name": "icap_access",
+        "description": "(replaced by adaptation_access in Squid-3.1) What requests may be sent to a particular ICAP server.",
+        "metadata": ""
+    },
+    {
+        "name": "adaptation_access",
+        "description": "What requests may be sent to a particular ICAP or eCAP filter service.",
+        "metadata": ""
+    },
+    {
+        "name": "log_access",
+        "description": "Controls which requests are logged. This is global and overrides specific file access lists appended to access_log directives.",
+        "metadata": ""
+    }
+]
