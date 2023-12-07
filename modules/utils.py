@@ -146,7 +146,7 @@ def run_command(hostname, username, password, key_filename, passphrase, command,
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     try:
         client.connect(hostname=hostname, port=22, username=username,
-                       password=password, key_filename=key_filename, passphrase=passphrase)
+                       password=password, key_filename=key_filename, passphrase=passphrase, timeout=10)
         _stdin, _stdout, _stderr = client.exec_command(command)
         if prompt is not None:
             _stdin.write(f'{prompt}\n')
@@ -240,7 +240,7 @@ def put_proxy_config(hostname, username, password, key_filename, passphrase, con
     try:
 
         client.connect(hostname, port=22, username=username,
-                       password=password, key_filename=key_filename, passphrase=passphrase)
+                       password=password, key_filename=key_filename, passphrase=passphrase, timeout=10)
         sftp_client = client.open_sftp()
         try:
             sftp_client.mkdir(f'{config.SQUID_PATH}/ssl_cert')
@@ -327,7 +327,7 @@ def get_proxy_config(hostname, username, password, key_filename, passphrase):
                     passphrase, command, password)
     try:
         client.connect(hostname, port=22, username=username,
-                       password=password, key_filename=key_filename, passphrase=passphrase)
+                       password=password, key_filename=key_filename, passphrase=passphrase, timeout=10)
         sftp_client = client.open_sftp()
         try:
             os.mkdir(f'{config.WORKING_DIR}/{hostname}')
