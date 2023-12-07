@@ -4,9 +4,9 @@ import pathlib
 PROJECT_ROOT = pathlib.Path(__file__).parent.resolve()
 
 # SETUP FOR LOCAL MACHINE ENV
-SSH_KEY_PATH = r"C:\Users\dangp\.ssh\id_rsa"
+SSH_KEY_PATH = r"/root/.ssh/id_rsa"
 WORKING_DIR = f"{PROJECT_ROOT}/servers"
-SETUP_FILE = f"{PROJECT_ROOT}/test_server.json"
+SETUP_FILE = f"{PROJECT_ROOT}/server_list.json"
 SAMPLE_DIR = f"{PROJECT_ROOT}/servers/sample"
 CERT_DIR = f"{PROJECT_ROOT}/servers/sample/ssl_cert"
 SAMPLE_PEM = f"{CERT_DIR}/squidCA.pem"
