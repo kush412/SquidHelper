@@ -305,7 +305,7 @@ def put_proxy_config(hostname, username, password, key_filename, passphrase, con
                     passphrase, command, prompt=f"{prompt}\n{prompt}")
 
     print('[*] Restarting squid service')
-    command = 'sudo -S squid -k restart'
+    command = 'sudo -S systemctl restart squid'
     if not password and username != 'root':
         prompt = getpass('[+] Enter password to restart Squid: ')
     else:
