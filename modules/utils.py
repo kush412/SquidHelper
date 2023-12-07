@@ -151,8 +151,8 @@ def run_command(hostname, username, password, key_filename, passphrase, command,
         if prompt is not None:
             _stdin.write(f'{prompt}\n')
             _stdin.flush()
-        stdout = _stdout.readline().decode()
-        stderr = _stderr.readline().decode()
+        stdout = _stdout.read().decode()
+        stderr = _stderr.read().decode()
         client.close()
         return stdout, stderr
     except Exception as e:
