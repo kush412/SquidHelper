@@ -18,21 +18,21 @@
         "config_path": "transparent.conf"
     },
     {
-        "name": "reverse proxy master",
+        "name": "reverse master",
         "ip_address": "10.10.66.2",
         "username": "squid",
         "password": "123",
         "ssh_key_path": null,
         "ssh_key_passphrase": null,
-        "config_path": "reverse_proxy.conf"
+        "config_path": "reverse.conf"
     },
     {
-        "name": "reverse proxy backup",
+        "name": "reverse backup",
         "ip_address": "10.10.66.3",
         "username": "squid",
         "password": "123",
         "ssh_key_path": null,
         "ssh_key_passphrase": null,
-        "config_path": "reverse_proxy.conf"
+        "config_path": "reverse.conf"
     }
 ]
