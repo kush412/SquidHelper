@@ -107,7 +107,11 @@ def single_setup(server: dict):
     if not squid_installed(hostname, username, password, key_filename, passphrase):
         print('[!] Squid is not installed. Preparing to install Squid...')
         install_squid(hostname, username, password, key_filename, passphrase)
-        print('[+] Installed Squid successfully.')
+        if squid_installed(hostname, username, password, key_filename, passphrase):
+            print('[+] Installed Squid successfully.')
+        else:
+            print('[!] Failed to install squid. Aborting...')
+            return
     else:
         print('[+] Squid is already installed.')
 
