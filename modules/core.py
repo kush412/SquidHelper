@@ -95,7 +95,7 @@ def select_acl(acl_list):
 	found_acls = find_objects_with_substring(acl_list, input("[*] ACL keyword: "))
 	list_acl(acl_list, found_acls)
 	try:
-		num = int(input('Select index of acl: '))
+		num = int(input('[+] Select index of acl: '))
 		if num in range(len(acl_list)):
 			acl = acl_list[num]
 			# print(f'[+] Selected {acl}')
@@ -142,7 +142,7 @@ def create_new_acl(acl_list):
 
 def update_acl(acl: Element, acl_list: list):
 	print(f"[+] Updating acl [{acl}]")
-	disable_acl = input(f'{"Disable" if acl.check_enabled() else "Enable"} ACL "{acl.name}" [Y/n]? ')
+	disable_acl = input(f'{"[?] Disable" if acl.check_enabled() else "Enable"} ACL "{acl.name}" [Y/n]? ')
 	if disable_acl.lower() == 'y' or disable_acl.lower() == '':
 		acl.disable_element() if acl.check_enabled() else acl.enable_element()
 	else:
