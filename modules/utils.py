@@ -49,7 +49,8 @@ def local_backup(config_file_path, temp_file_path):
         # Rename the temporary file to the configuration file
         os.rename(temp_file_path, config_file_path)
         print(f"[+] Backup created at: {backup_file_path}")
-        print(f"[+] Configuration file updated successfully.")
+        # print(f"[+] Configuration file updated successfully.")
+        return backup_file_path
     except Exception as e:
         # If an error occurs, restore the backup
         shutil.move(backup_file_path, config_file_path)
@@ -316,9 +317,10 @@ def put_proxy_config(hostname, username, password, key_filename, passphrase, con
         prompt = password
     sO, sE = run_command(hostname, username, password, key_filename, passphrase, command, prompt=f"{prompt}")
     if "error" in sE.lower() or "failed" in sE.lower():
-        print('[!] Error. Please check log')
+        return False
     else:
         print('[+] Done.')
+        return True
 
 
 # Download config files
@@ -399,12 +401,27 @@ def upload_config_file(server, config_file):
         password = server.get('password')
         key_filename = server.get('ssh_key_path')
         passphrase = server.get('ssh_key_passphrase')
+        print(f"[+] Updating server {hostname} configurations")
+        if put_proxy_config(hostname, username, password, key_filename, passphrase, config_file, working_dir_ip=hostname):
+            return True
+        else:
+            try:
+                print('[*] Trying to start squid service')
+                command = 'sudo -S systemctl start squid'
+                if not password and username != 'root':
+                    prompt = getpass('[+] Enter password to start Squid: ')
+                else:
+                    prompt = password
+                sO, sE = run_command(hostname, username, password, key_filename, passphrase, command,
+                                     prompt=f"{prompt}")
+                if "error" in sE.lower() or "failed" in sE.lower():
+                    print('[!] Error. Please check log')
+                else:
+                    print('[+] Done.')
+            except Exception as e:
+                print(e)
     else:
         print('[!] Failed to load server information!')
-        return
-
-    print(f"[+] Updating server {hostname} configurations")
-    put_proxy_config(hostname, username, password, key_filename, passphrase, config_file, working_dir_ip=hostname)
 
 
 # Modify config to tmp file

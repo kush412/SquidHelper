@@ -108,7 +108,7 @@ def select_acl(acl_list):
 
 
 def create_new_acl(acl_list):
-	found_acls = find_objects_with_substring(config.LIST_ACL_NAME, input("[*] ACL keyword: "))
+	found_acls = find_objects_with_substring(config.LIST_ACL_NAME, input("[*] Element keyword: "))
 	for acl in found_acls:
 		print(f"- {acl['name']:<20} : {acl['description']}")
 	acl_element = input("[?] ACL element: ")
@@ -140,13 +140,13 @@ def create_new_acl(acl_list):
 		print(f'[!] ACL {acl_element} not found!')
 
 
-def update_acl(acl: Element, acl_list: list):
-	print(f"[+] Updating acl [{acl}]")
+def update_acl(acl: Element, acl_list: list, rule_list: list):
 	disable_acl = input(f'{"[?] Disable" if acl.check_enabled() else "[?] Enable"} ACL "{acl.name}" [Y/n]? ')
 	if disable_acl.lower() == 'y' or disable_acl.lower() == '':
 		acl.disable_element() if acl.check_enabled() else acl.enable_element()
 	else:
-		found_acls = find_objects_with_substring(config.LIST_ACL_NAME, input("[*] ACL keyword: "))
+		print(f"[+] Updating acl [{acl}]")
+		found_acls = find_objects_with_substring(config.LIST_ACL_NAME, input("[*] New element keyword: "))
 		for ele in found_acls:
 			print(f"- {ele['name']:<20} : {ele['description']}")
 		new_ele = input(f"[+] Current acl [{acl.acl}] - New acl (leave blank for no change): ")
@@ -154,9 +154,12 @@ def update_acl(acl: Element, acl_list: list):
 			if new_ele != '':
 				acl.acl = new_ele
 			try:
+				rules_contain_acl = rules_contain_acl_name(acl.name, rule_list)
 				new_name = input(f'[+] Current name [{acl.name}] - New name (leave blank for no change): ')
 				if new_name != '':
 					if not check_acl_name(new_name, new_ele, acl_list):
+						for rule in rules_contain_acl:
+							rule.acls[rule.acls.index(acl.name)] = new_name
 						acl.name = new_name
 				new_value = input(f'[+] Current value [{acl.value}] - New value (leave blank for no change: ')
 				if new_value != '':
@@ -218,6 +221,14 @@ def select_rule(rule_list):
 		print(e)
 
 
+def rules_contain_acl_name(acl_name, rule_list):
+	imp_rules = []
+	for rule in rule_list:
+		if acl_name in rule.acls:
+			imp_rules.append(rule)
+	return imp_rules
+
+
 def create_new_rule(rule_list, acl_list):
 	found_rules = find_objects_with_substring(config.LIST_RULE_NAME, input('[*] Rule keyword: '))
 	for rule in found_rules:
@@ -266,16 +277,28 @@ def validate_rule(acl: Element, rule_list, acl_list):
 	print(f'[*] Validating rules with updated ACL: [{acl}]')
 	for rule in rule_list:
 		if acl.name in rule.acls:
-			if [ele.name for ele in acl_list].count(acl.name) <= 1:
+			if [ele.name for ele in acl_list].count(acl.name) < 1:
 				rule.disable_rule()
+	print(f'[+] Validated rules with updated ACL: [{acl}]')
+
+
+def validate_rules_and_acls(rule_list, acl_list):
+	print('[*] Validating all rules and acls.')
+	for rule in rule_list:
+		if rule.check_enable():
+			list_rule_acls_name = rule.acls
+			for acl_name in list_rule_acls_name:
+				if [ele.name for ele in acl_list].count(acl_name) < 1 and acl_name not in ['manager', 'all']:
+					rule.disable_rule()
+	print('[+] Validated all rules and acls.')
 
 
 def update_rule(rule: Rule, acl_list):
-	print(f"[+] Updating rule [{rule}]")
 	disable_rule = input(f'{"[?] Disable" if rule.check_enable() else "[?] Enable"} rule "{rule.name}" [Y/n]? ')
 	if disable_rule.lower() == 'y' or disable_rule.lower() == '':
 		rule.disable_rule() if rule.check_enable() else rule.enable_rule()
 	else:
+		print(f"[+] Updating rule [{rule}]")
 		found_rules = find_objects_with_substring(config.LIST_RULE_NAME, input('[*] Rule keyword: '))
 		for _rule in found_rules:
 			print(f"- {_rule['name']:<25} : {_rule['description']}")
@@ -400,13 +423,13 @@ def ACL_MENU(rule_list, acl_list):
 				create_new_acl(acl_list)
 			elif choice == 3:
 				selected_acl = select_acl(acl_list)
-				update_acl(selected_acl, acl_list)
-				validate_rule(selected_acl, rule_list, acl_list)
+				update_acl(selected_acl, acl_list, rule_list)
 			elif choice == 4:
 				selected_acl = select_acl(acl_list)
 				delete_acl(selected_acl, acl_list)
 				validate_rule(selected_acl, rule_list, acl_list)
 			else:
+				validate_rules_and_acls(rule_list, acl_list)
 				break
 		except Exception as e:
 			print(f'An error occurred: {e}')
@@ -439,6 +462,7 @@ def RULE_MENU(rule_list, acl_list):
 			elif choice == 5:
 				delete_rule(select_rule(rule_list), rule_list)
 			else:
+				validate_rules_and_acls(rule_list, acl_list)
 				break
 		except Exception as e:
 			print(f'An error has occurred: {e}')

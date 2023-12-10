@@ -3,6 +3,6 @@
 **/.todo
 *.bak
 test_server.json
-server/
+server/*
 !server/sample
 test*
