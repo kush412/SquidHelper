@@ -2,7 +2,6 @@
 **/.idea
 **/.todo
 *.bak
-test_server.json
-server/*
-!server/sample
+servers/*
+!servers/sample
 test*
