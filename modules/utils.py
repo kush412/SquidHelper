@@ -260,13 +260,13 @@ def put_proxy_config(hostname, username, password, key_filename, passphrase, con
         except:
             pass
         sftp_client.put(config_file, f'{config.SQUID_PATH}/squid.conf')
-        command = 'sudo -S chmod -R 744 /etc/squid/ssl_cert'
+        command = 'sudo -S chmod -R 700 /etc/squid/ssl_cert && sudo -S chown -R proxy:proxy /etc/squid/ssl_cert'
         if username != 'root' and not password:
             prompt = getpass('[+] Enter password to backup Squid: ')
         else:
             prompt = password
         run_command(hostname, username, password, key_filename,
-                        passphrase, command, prompt)
+                        passphrase, command, prompt=f"{prompt}\n{prompt}")
         if working_dir_ip == '':
             sftp_client.put(config.SAMPLE_PEM, config.SQUID_PEM)
             sftp_client.put(config.SAMPLE_DER, config.SQUID_DER)
