@@ -316,6 +316,7 @@ def put_proxy_config(hostname, username, password, key_filename, passphrase, con
         prompt = password
     sO, sE = run_command(hostname, username, password, key_filename, passphrase, command, prompt=f"{prompt}")
     if "error" in sE.lower() or "failed" in sE.lower():
+        print('[!] Error.')
         return False
     else:
         print('[+] Done.')
