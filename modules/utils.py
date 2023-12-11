@@ -130,6 +130,13 @@ def single_setup(server: dict):
         backup_squid(hostname, username, password, key_filename, passphrase)
         print('[+] Backup is created.')
 
+    # Re-initialize the SSL database
+    try:
+        ssl_db_erase(hostname, username, password, key_filename, passphrase)
+        ssl_db_init(hostname, username, password, key_filename, passphrase)
+    except Exception as e:
+        print(f"[!] Failed to re-initialize ssl_db at {e}")
+
     # Configure
     if config_path != '':
         print(f'[*] Uploading new configurations')
@@ -162,6 +169,26 @@ def run_command(hostname, username, password, key_filename, passphrase, command,
         return stdout, stderr
     except Exception as e:
         print(f'[!] Error in executing {command}: {e}')
+
+
+def ssl_db_erase(hostname, username, password, key_filename, passphrase):
+    command = 'sudo -S rm -rf /var/lib/squid/ssl_db'
+    if not password and username != 'root':
+        prompt = getpass('[+] Enter password to erase ssl_db: ')
+    else:
+        prompt = password
+    run_command(
+        hostname, username, password, key_filename, passphrase, command, prompt=f"{prompt}")
+
+
+def ssl_db_init(hostname, username, password, key_filename, passphrase, capacity=4):
+    command = f'sudo -S /usr/lib/squid/security_file_certgen -c -s /var/lib/squid/ssl_db -M {capacity}MB'
+    if not password and username != 'root':
+        prompt = getpass('[+] Enter password to erase ssl_db: ')
+    else:
+        prompt = password
+    run_command(
+        hostname, username, password, key_filename, passphrase, command, prompt=f"{prompt}")
 
 
 # Check squid is installed
