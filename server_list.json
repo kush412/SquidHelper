@@ -2,37 +2,37 @@
     {
         "name": "forward proxy",
         "ip_address": "10.10.10.2",
-        "username": "squid",
-        "password": "ff",
+        "username": "root",
+        "password": "",
         "ssh_key_path": null,
-        "ssh_key_passphrase": null,
+        "ssh_key_passphrase": "123456",
         "config_path": "explicit.conf"
     },
     {
         "name": "transparent proxy",
         "ip_address": "10.10.20.2",
-        "username": "squid",
-        "password": "ff",
+        "username": "root",
+        "password": "",
         "ssh_key_path": null,
-        "ssh_key_passphrase": null,
+        "ssh_key_passphrase": "123456",
         "config_path": "transparent.conf"
     },
     {
         "name": "reverse master",
         "ip_address": "10.10.66.2",
-        "username": "squid",
-        "password": "123",
+        "username": "root",
+        "password": "",
         "ssh_key_path": null,
-        "ssh_key_passphrase": null,
+        "ssh_key_passphrase": "123456",
         "config_path": "reverse.conf"
     },
     {
         "name": "reverse backup",
         "ip_address": "10.10.66.3",
-        "username": "squid",
-        "password": "123",
+        "username": "root",
+        "password": "",
         "ssh_key_path": null,
-        "ssh_key_passphrase": null,
+        "ssh_key_passphrase": "123456",
         "config_path": "reverse.conf"
     }
 ]

@@ -260,7 +260,7 @@ def put_proxy_config(hostname, username, password, key_filename, passphrase, con
         except:
             pass
         sftp_client.put(config_file, f'{config.SQUID_PATH}/squid.conf')
-        command = 'sudo -S chmod -R 700 /etc/squid/ssl_cert'
+        command = 'sudo -S chmod -R 744 /etc/squid/ssl_cert'
         if username != 'root' and not password:
             prompt = getpass('[+] Enter password to backup Squid: ')
         else:
