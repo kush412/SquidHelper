@@ -288,7 +288,7 @@ def validate_rules_and_acls(rule_list, acl_list):
 		if rule.check_enable():
 			list_rule_acls_name = rule.acls
 			for acl_name in list_rule_acls_name:
-				if [ele.name for ele in acl_list].count(acl_name) < 1 and acl_name not in ['manager', 'all']:
+				if [ele.name for ele in acl_list].count(acl_name) < 1 and acl_name not in ['manager', 'all', 'localhost']:
 					rule.disable_rule()
 	print('[+] Validated all rules and acls.')
 
