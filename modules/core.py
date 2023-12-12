@@ -274,12 +274,13 @@ def create_new_rule(rule_list, acl_list):
 
 
 def validate_rule(acl: Element, rule_list, acl_list):
-	print(f'[*] Validating rules with updated ACL: [{acl}]')
-	for rule in rule_list:
-		if acl.name in rule.acls:
-			if [ele.name for ele in acl_list].count(acl.name) < 1:
-				rule.disable_rule()
-	print(f'[+] Validated rules with updated ACL: [{acl}]')
+	if not acl.check_enabled():
+		print(f'[*] Validating rules with updated ACL: [{acl}]')
+		for rule in rule_list:
+			if acl.name in rule.acls:
+				if [ele.name for ele in acl_list].count(acl.name) <= 1:
+					rule.disable_rule()
+		print(f'[+] Validated rules with updated ACL: [{acl}]')
 
 
 def validate_rules_and_acls(rule_list, acl_list):
