@@ -413,12 +413,13 @@ def download_config_file(server):
         passphrase = server.get('ssh_key_passphrase')
     else:
         print('[!] Failed to load server information!')
-        return
-
-    print(f"[+] Retrieving server {hostname} configurations")
-    get_proxy_config(hostname, username, password, key_filename, passphrase)
-    config_file = f"{config.WORKING_DIR}/{hostname}/squid.conf"
-    return config_file
+    if squid_installed(hostname, username, password, key_filename, passphrase):
+        print(f"[+] Retrieving server {hostname} configurations")
+        get_proxy_config(hostname, username, password, key_filename, passphrase)
+        config_file = f"{config.WORKING_DIR}/{hostname}/squid.conf"
+        return config_file
+    else:
+        print(f"[!] Squid is not installed.")
 
 
 def upload_config_file(server, config_file):
