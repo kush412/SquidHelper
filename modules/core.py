@@ -11,7 +11,7 @@ def extract_squid_element(file_path):
 			for line in squid_config:
 				line = line.strip().split(' ')
 
-				if len(line) > 2 and line[0] == "acl" and line[2] in element_acl:
+				if len(line) > 2 and (line[0] == "acl" or line[0] == "#acl") and line[2] in element_acl:
 					_enabled = line[0]
 					name = line[1]
 					acl = line[2]
