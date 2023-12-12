@@ -180,7 +180,7 @@ def delete_acl(acl: Element, acl_list: list):
 	choice = input(f"[?] Delete acl '{acl}' [Y/n]: ")
 	if choice.lower() == 'y' or choice == '':
 		acl_list.remove(acl)
-		print(f"[-] ACL {acl} deleted successfully!")
+		print(f"[-] ACL [{acl}] deleted successfully!")
 	else:
 		return
 
@@ -260,7 +260,7 @@ def create_new_rule(rule_list, acl_list):
 						print(f'acl [{value}] already added!')
 						continue
 			new_rule = Rule(name=rule_name, option=rule_option, acls=rule_value)
-			add_to_list = input(f'[+] Add new acl [{new_rule}] [Y/n]?')
+			add_to_list = input(f'[+] Add new rule [{new_rule}] [Y/n]?')
 			if add_to_list.lower() == 'y' or add_to_list == '':
 				rule_list.append(new_rule)
 				print(f'[+] Rule [{new_rule}] has been added successfully!')
@@ -365,7 +365,7 @@ def delete_rule(rule: Rule, rule_list: list):
 	choice = input(f"[?] Delete rule {rule} [Y/n]: ")
 	if choice.lower() == 'y' or choice == '':
 		rule_list.remove(rule)
-		print(f"[-] Rule {rule} deleted successfully!")
+		print(f"[-] Rule [{rule}] deleted successfully!")
 	else:
 		return
 
