@@ -420,6 +420,7 @@ def download_config_file(server):
         return config_file
     else:
         print(f"[!] Squid is not installed.")
+        exit(0)
 
 
 def upload_config_file(server, config_file):
