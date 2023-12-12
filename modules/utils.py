@@ -327,13 +327,13 @@ def put_proxy_config(hostname, username, password, key_filename, passphrase, con
 
     except Exception as e:
         print(f'An error occurred in putting new config: {e}')
-    command = f'sudo -S chmod -R 744 /etc/squid && sudo -S chmod -R 700 /etc/squid/ssl_cert && sudo -S chown -R proxy:proxy /etc/squid/ssl_cert && sudo -S squid -f {config.SQUID_PATH}/squid.conf'
+    command = f'sudo -S chmod -R 744 /etc/squid && sudo -S chmod -R 700 /etc/squid/ssl_cert && sudo -S chown -R proxy:proxy /etc/squid/ssl_cert && sudo -S cp /etc/squid/ssl_cert/squid.der /var/www/html/squid.der && sudo -S squid -f {config.SQUID_PATH}/squid.conf'
     if not password and username != 'root':
         prompt = getpass('[+] Enter password to restart Squid: ')
     else:
         prompt = password
     run_command(hostname, username, password, key_filename,
-                passphrase, command, prompt=f"{prompt}\n{prompt}\n{prompt}\n{prompt}")
+                passphrase, command, prompt=f"{prompt}\n{prompt}\n{prompt}\n{prompt}\n{prompt}")
 
     print('[*] Restarting squid service')
     command = 'sudo -S systemctl restart squid'
