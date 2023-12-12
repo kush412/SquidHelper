@@ -427,6 +427,7 @@ def ACL_MENU(rule_list, acl_list):
 			elif choice == 3:
 				selected_acl = select_acl(acl_list)
 				update_acl(selected_acl, acl_list, rule_list)
+				validate_rule(selected_acl, rule_list, acl_list)
 			elif choice == 4:
 				selected_acl = select_acl(acl_list)
 				delete_acl(selected_acl, acl_list)
