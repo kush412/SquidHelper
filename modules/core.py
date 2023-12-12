@@ -347,14 +347,17 @@ def update_rule(rule: Rule, acl_list):
 def validate_acl(rule: Rule, acl_list):
 	print("[*] Validating acls.")
 	list_of_acl = map_acl_by_name(rule.acls, acl_list)
-	for acl in list_of_acl:
-		if ([ele.name for ele in acl_list].count(acl.name) <= 1 and not acl.check_enabled()) or \
-			[ele._enabled for ele in acl_list].count(acl.check_enabled()) == len(list_of_acl) or \
-			(len(list_of_acl) < len(rule.acls) and "manager" not in rule.acls):
-			print(f"[!] Failed to enable rule [{rule.name}] due to invalid acls.")
-			rule.disable_rule()
-		else:
-			print("[+] All acls are validated.")
+	if len(list_of_acl) > 0:
+		for acl in list_of_acl:
+			if ([ele.name for ele in acl_list].count(acl.name) <= 1 and not acl.check_enabled()) or \
+				[ele._enabled for ele in acl_list].count(acl.check_enabled()) == len(list_of_acl) or \
+				(len(list_of_acl) < len(rule.acls) and "manager" not in rule.acls):
+				print(f"[!] Failed to enable rule [{rule.name}] due to invalid acls.")
+				rule.disable_rule()
+			else:
+				print("[+] All acls are validated.")
+	else:
+		rule.disable_rule()
 
 
 def delete_rule(rule: Rule, rule_list: list):

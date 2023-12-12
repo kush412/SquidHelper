@@ -37,6 +37,7 @@ def main():
     extracted_acls = core.extract_squid_element(config_file)
     extracted_rules = core.extract_squid_rule(config_file)
     tmp_file = utils.prep_tmp_file(config_file, extracted_acls, extracted_rules)
+    core.validate_rules_and_acls(extracted_rules, extracted_acls)
     while True:
         print('\n[*] Features list:')
         print(f'{" ":>4}1. ACL MANAGEMENT')
